@@ -9,7 +9,7 @@ namespace FirstBlockChain
     public class Blockchain
     {
         private static List<Block> blockchain = new List<Block>();
-        private static int difficulty = 4; // Zorluk seviyesi
+        private static int difficulty = 5; // Zorluk seviyesi
         private static bool isMining = false;
         public static void CreateGenesisBlock()
         {
@@ -43,7 +43,8 @@ namespace FirstBlockChain
             }
         }
 
-        public static void StopMining(){
+        public static void StopMining()
+        {
             isMining = false;
         }
 
@@ -78,11 +79,14 @@ namespace FirstBlockChain
 
         public static string calculateHashForBlock(Block block)
         {
-            SHA256 sha256 = new SHA256CryptoServiceProvider();
-
-            string makinghash = block.getIndex() + block.getPreviousHash() + block.getTimestamp() + block.getData() + block.getNonce();
-
-            return Convert.ToBase64String(sha256.ComputeHash(Encoding.UTF8.GetBytes(makinghash)));
+            var crypt = new SHA256Managed();
+            var hash = new StringBuilder();
+            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes($"{block.getIndex()}-{block.getPreviousHash()}-{block.getTimestamp()}-{block.getData()}-{block.getNonce()}"));
+            foreach (byte theByte in crypto)
+            {
+                hash.Append(theByte.ToString("x2"));
+            }
+            return hash.ToString();
         }
 
         public static bool isValidHashDifficulty(string hash) // Burası tamaen kendi kabul sistemimiz. Bir hash i kabul etmek için hash üzerinde farklı kontroller yapabilirsiniz.
