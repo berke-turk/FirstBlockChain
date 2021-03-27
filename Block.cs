@@ -5,34 +5,39 @@ namespace FirstBlockChain
     public class Block
     {
         private int index;
-        public int getIndex(){
+        public int getIndex()
+        {
             return this.index;
         }
         private string previousHash;
-        public string getPreviousHash(){
+        public string getPreviousHash()
+        {
             return this.previousHash;
         }
         private string timestamp;
-        public string getTimestamp(){
+        public string getTimestamp()
+        {
             return this.timestamp;
         }
         private string data;
-        public string getData(){
+        public string getData()
+        {
             return this.data;
         }
         private string hash;
-        
+
         public void setHash(string _hash)
         {
             this.hash = _hash;
         }
-        
+
         public string getHash()
         {
             return this.hash;
         }
         private int nonce;
-        public int getNonce(){
+        public int getNonce()
+        {
             return this.nonce;
         }
 
@@ -61,7 +66,7 @@ namespace FirstBlockChain
 
         public string viewBlock()
         {
-            return $"index : {this.index} | previous hash : {this.previousHash} | timestamp : {this.timestamp} | data : {this.data} | hash : {this.hash} | nonce : {nonce}";
+            return "\"block\" : \n{ \"index\" : " + this.index + ",\n \"previous hash\" : " + this.previousHash + ",\n \"timestamp\" : " + this.timestamp + ",\n \"data\" : " + this.data + ",\n \"hash\" : " + this.hash + ",\n \"nonce\" : " + nonce + "\n}";
         }
     }
 
@@ -69,7 +74,7 @@ namespace FirstBlockChain
     {
         public static Block getGenesisBlock()
         {
-            return new Block(0, "0", DateTime.Now.ToString("ddd, dd MMM yyy HH':'mm':'ss 'GMT'"), "First Coinnnnnn in BlockChain", "000dc75a315c77a1f9c98fb6247d03dd18ac52632d7dc6a9920261d8109b37cf", 604);
+            return new Block(0, "0", DateTime.Now.ToString("ddd, dd MMM yyy HH':'mm':'ss 'GMT'"), "Genesis Block", "000dc75a315c77a1f9c98fb6247d03dd18ac52632d7dc6a9920261d8109b37cf", 604);
         }
     }
 }
